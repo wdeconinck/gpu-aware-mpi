@@ -28,13 +28,24 @@
       }
     },
     {
+      "name": "nvidia-26.1-nvhpc-hpcx",
+      "inherits": "ecmwf-hpc2020",
+      "displayName": "ECMWF HPC2020 / NVIDIA 26.1",
+      "description": "Use scripts/configure.sh --preset nvidia-26.1 to load the environment from vendor metadata.",
+      "vendor": {
+        "ecmwf.int/gpu-aware-mpi/1.0": {
+          "environmentFile": "arch/ecmwf/hpc2020/nvidia/26.1/nvhpc-hpcx/env.sh"
+        }
+      }
+    },
+    {
       "name": "nvidia-26.1",
       "inherits": "ecmwf-hpc2020",
       "displayName": "ECMWF HPC2020 / NVIDIA 26.1",
       "description": "Use scripts/configure.sh --preset nvidia-26.1 to load the environment from vendor metadata.",
       "vendor": {
         "ecmwf.int/gpu-aware-mpi/1.0": {
-          "environmentFile": "arch/ecmwf/hpc2020/nvidia/26.1/env.sh"
+          "environmentFile": "arch/ecmwf/hpc2020/nvidia/26.1/hpcx-openmpi-cuda/env.sh"
         }
       }
     }
@@ -43,6 +54,11 @@
     {
       "name": "nvidia-24.5",
       "configurePreset": "nvidia-24.5",
+      "inheritConfigureEnvironment": true
+    },
+    {
+      "name": "nvidia-26.1-nvhpc-hpcx",
+      "configurePreset": "nvidia-26.1-nvhpc-hpcx",
       "inheritConfigureEnvironment": true
     },
     {
@@ -59,6 +75,15 @@
         { "type": "configure", "name": "nvidia-24.5" },
         { "type": "build", "name": "nvidia-24.5" },
         { "type": "test", "name": "nvidia-24.5" }
+      ]
+    },
+    {
+      "name": "nvidia-26.1-nvhpc-hpcx",
+      "displayName": "Configure, build, and test / NVIDIA 26.1",
+      "steps": [
+        { "type": "configure", "name": "nvidia-26.1-nvhpc-hpcx" },
+        { "type": "build", "name": "nvidia-26.1-nvhpc-hpcx" },
+        { "type": "test", "name": "nvidia-26.1-nvhpc-hpcx" }
       ]
     },
     {
@@ -90,6 +115,17 @@
       "inherits": "gpu-tests",
       "configurePreset": "nvidia-24.5",
       "displayName": "GPU integration tests / NVIDIA 24.5",
+      "vendor": {
+        "ecmwf.int/gpu-aware-mpi/1.0": {
+          "sallocArguments": ["-q", "dg", "--nodes=1", "--gpus-per-task=1", "--tasks-per-node=4", "--cpus-per-task=1"]
+        }
+      }
+    },
+    {
+      "name": "nvidia-26.1-nvhpc-hpcx",
+      "inherits": "gpu-tests",
+      "configurePreset": "nvidia-26.1-nvhpc-hpcx",
+      "displayName": "GPU integration tests / NVIDIA 26.1",
       "vendor": {
         "ecmwf.int/gpu-aware-mpi/1.0": {
           "sallocArguments": ["-q", "dg", "--nodes=1", "--gpus-per-task=1", "--tasks-per-node=4", "--cpus-per-task=1"]

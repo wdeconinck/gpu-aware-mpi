@@ -11,12 +11,9 @@ export CUDAHOSTCXX=$GCC_TOOLCHAIN/bin/g++
 # Set the CUDA architecture for A100
 export CUDAARCHS=80 
 
-# The hpcx-openmpi module is not compiled with cuda support
-#module load hpcx-openmpi
-
 # But the hpcx bundled within NVHPC_ROOT works
-HPCX_MODULES=$(find $NVHPC_ROOT/comm_libs -type d -name "modulefiles")
-module use "$HPCX_MODULES"
+NVHPC_HPCX_MODULES=$(find $NVHPC_ROOT/comm_libs -type d -name "modulefiles")
+module use "$NVHPC_HPCX_MODULES"
 module load hpcx-ompi
 
 
